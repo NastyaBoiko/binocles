@@ -79,13 +79,13 @@ class ProductController {
 
     public function show($n) {
         if (isset($this->products[$n])) {
-            $this->view->renderHtml('Main/product.php', ['product' => $this->products[$n]]);
+            $this->view->renderHtml('Product/product.php', ['product' => $this->products[$n]]);
         } else {
             echo 'Такого продукта нет';
         }
     }
 
     public function all() {
-        $this->view->renderHtml('Main/products.php', ['products' => $this->products]);
+        $this->view->renderHtml('Product/products.php', ['products' => $this->products]);
     }
 }
