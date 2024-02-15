@@ -3,23 +3,23 @@
 namespace Src\Controllers;
 
 use \Src\Views\View;
+use Src\Services\Db;
 
 class MainController 
 {
     private $view;
+    private $db;
     private $layout = 'default';
     
     public function __construct()
     {
         $this->view = new View($this->layout);
+        $this->db = new Db();
     }
 
     public function main()
     {
-        $articles = [
-            ['name' => 'Статья 1', 'text' => 'Текст статьи 1'],
-            ['name' => 'Статья 2', 'text' => 'Текст статьи 2']
-        ];
+        $articles = $this->db->query('SELECT * FROM `articles`;');
         $this->view->renderHtml('Main/main.php', ['articles' => $articles]);
     }
 
