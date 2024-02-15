@@ -2,8 +2,7 @@
 
 namespace Src\Controllers;
 
-use \Src\Views\View;
-use Src\Services\Db;
+use Src\Models\Articles\Article;
 
 class ArticlesController extends Controller
 {
@@ -26,7 +25,8 @@ class ArticlesController extends Controller
 
     public function all()
     {
-        $articles = $this->db->query('SELECT * FROM `articles`;');
+        $articles = $this->db->query('SELECT * FROM `articles`;', [], Article::class);
+        // var_dump($articles);
         $this->view->renderHtml('Articles/all.php', ['articles' => $articles]);
     }
 

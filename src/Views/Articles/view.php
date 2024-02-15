@@ -1,3 +1,3 @@
 
-<h1><?= $article['name']?></h1>
-<p><?= $article['text']?></p>
+<h1><?= $article->getName()?></h1>
+<p><?= $article->getText() ?></p>
