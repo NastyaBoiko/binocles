@@ -10,7 +10,8 @@ class View {
         $this->layout = $layout;
         
     }
-    public function renderHtml(string $viewName, array $vars = []) {
+    public function renderHtml(string $viewName, array $vars = [], int $code = 200) {
+        http_response_code($code);
         $layoutFile = "Layouts/{$this->layout}.php";
         // Тут достается из конечного вью html разметка с подстановкой articles (за счет extract)
         $content = $this->renderFile($viewName, $vars);

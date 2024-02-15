@@ -17,16 +17,17 @@ class ArticlesController extends Controller
 
         if ($result === []) {
             // Здесь обработка ошибки
+            $this->view->renderHtml('Errors/404.php', [], 404);
             return;
         }
-        
+
         $this->view->renderHtml('Articles/view.php', ['article' => $result[0]]);
     }
 
     public function all()
     {
         $articles = $this->db->query('SELECT * FROM `articles`;');
-        $this->view->renderHtml('Articles/articles.php', ['articles' => $articles]);
+        $this->view->renderHtml('Articles/all.php', ['articles' => $articles]);
     }
 
 }
