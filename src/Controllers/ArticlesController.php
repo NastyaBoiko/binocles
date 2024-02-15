@@ -11,7 +11,8 @@ class ArticlesController extends Controller
     {
         $result = $this->db->query(
             'SELECT * FROM `articles` WHERE id = :id;',
-            [':id' => $articleId]
+            [':id' => $articleId], 
+            Article::class
         );
 
         if ($result === []) {
