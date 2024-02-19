@@ -9,24 +9,20 @@ class ArticlesController extends Controller
 
     public function view(int $articleId)
     {
-        $result = $this->db->query(
-            'SELECT * FROM `articles` WHERE id = :id;',
-            [':id' => $articleId], 
-            Article::class
-        );
+        $article = Article::getById($articleId);
 
-        if ($result === []) {
+        if ($article === []) {
             // Здесь обработка ошибки
             $this->view->renderHtml('Errors/404.php', [], 404);
             return;
         }
 
-        $this->view->renderHtml('Articles/view.php', ['article' => $result[0]]);
+        $this->view->renderHtml('Articles/view.php', ['article' => $article]);
     }
 
     public function all()
     {
-        $articles = $this->db->query('SELECT * FROM `articles`;', [], Article::class);
+        $articles = Article::findAll();
         // var_dump($articles);
         $this->view->renderHtml('Articles/all.php', ['articles' => $articles]);
     }

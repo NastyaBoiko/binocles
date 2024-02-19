@@ -6,5 +6,6 @@ return [
     '~^product/(.*)$~' => [\Src\Controllers\ProductController::class, 'show'],
     '~^articles/all$~' => [\Src\Controllers\ArticlesController::class, 'all'],
     '~^articles/(\d+)$~' => [\Src\Controllers\ArticlesController::class, 'view'],
+    '~^users/all$~' => [\Src\Controllers\UsersController::class, 'all'],
     '~^$~' => [\Src\Controllers\MainController::class, 'main'],
 ];

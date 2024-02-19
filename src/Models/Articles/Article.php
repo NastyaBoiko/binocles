@@ -2,26 +2,16 @@
 
 namespace Src\Models\Articles;
 
-class Article {
-    private $id;
-    private $name;
-    private $text;
+use Src\Models\ActiveRecordEntity;
+use Src\Models\Users\User;
+
+class Article extends ActiveRecordEntity {
+    protected $name;
+    protected $text;
     // В бд по-другому, autorId = author_id и createdAt = created_at, надо использовать магический метод __set, в который попадает название поля из таблицы и его значение
-    private $authorId;
-    private $createdAt;
+    protected $authorId;
+    protected $createdAt;
 
-
-    // Вызывается при попытке изменить значение несуществующего (как в данном случае не существует $autor_id) или скрытого свойства
-    public function __set($name, $value)
-    {
-        // echo 'Пытаюсь создать для свойства ' . $name . ' значение ' . $value . '<br>';
-        $camelCaseName = $this->underscoreToCamelCase($name);
-        $this->$camelCaseName = $value;
-    }
-
-    public function getId(): int {
-        return $this->id;
-    }
     public function getName(): string {
         return $this->name;
     }
@@ -29,9 +19,14 @@ class Article {
         return $this->text;
     }
 
-    // Преобразует author_id в autorId 
-    private function underscoreToCamelCase(string $source): string {
-        return lcfirst(str_replace('_', '', ucwords($source, '_')));
+    public function getAuthorId(): int {
+        // (int) - приведение к типу int
+        return (int) $this->authorId;
     }
-
+    public function getAuthor(): User {
+        return User::getById($this->authorId);
+    }
+    protected static function getTableName(): string {
+        return 'articles';
+    }
 }
