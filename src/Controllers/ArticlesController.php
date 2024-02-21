@@ -27,4 +27,16 @@ class ArticlesController extends Controller
         $this->view->renderHtml('Articles/all.php', ['articles' => $articles]);
     }
 
+    public function edit(int $articleId): void {
+        $article = Article::getById($articleId);
+        if ($article === null) {
+            $this->view->renderHtml('errors/404.php', [], 404);
+            return;
+        }
+        $this->view->renderHtml('Articles/edit.php', ['article' => $article]);
+        // $article->setName('Новое название статьи');
+        // $article->setText('Новый текст статьи');
+        // $article->save();
+    }
+
 }
