@@ -47,6 +47,17 @@ class ArticlesController extends Controller
         $article->setName('Еще одна статья');
         $article->setText('Текст еще одной статьи');
         $article->save();
+        // var_dump($article);
+    }
+
+    // void значит нет return
+    public function delete(int $articleId): void {
+        $article = Article::getById($articleId);
+        if ($article === null) {
+            $this->view->renderHtml('errors/404.php', [], 404);
+            return;
+        }
+        $article->delete();
         var_dump($article);
     }
 

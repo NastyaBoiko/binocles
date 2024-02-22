@@ -96,6 +96,14 @@ abstract class ActiveRecordEntity {
         $this->id = $db->getLastInsertId();
     }
 
+    public function delete(): void {
+        // DELETE FROM `название таблицы` WHERE id=:id;
+        $db = Db::getInstance();
+        $db->query('DELETE FROM `' . static::getTableName() . '` WHERE id=:id', [':id' => $this->id]);
+
+        $this->id = null;
+    }
+
     private function mapPropertiesToDbFormat(): array {
         $reflector = new \ReflectionObject($this);
         $properties = $reflector->getProperties();
