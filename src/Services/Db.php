@@ -2,22 +2,28 @@
 
 namespace Src\Services;
 
+use Src\Exceptions\DbException;
+
 class Db {
-    private static $instancesCount = 0;
     private static $instance;
 
     private $pdo;
 
     private function __construct() {
-        self::$instancesCount++;
         $dbOptions = (require __DIR__ . '/../Config/settings.php')['db'];
-        $this->pdo = new \PDO(
-            'mysql:host=' . $dbOptions['host'] . ';dbname=' . $dbOptions['dbname'],
-            $dbOptions['user'],
-            $dbOptions['password']
-        );
-        // установка кодировки
-        $this->pdo->exec('SET NAMES UTF8'); 
+        try {
+            $this->pdo = new \PDO(
+                'mysql:host=' . $dbOptions['host'] . ';dbname=' . $dbOptions['dbname'],
+                $dbOptions['user'],
+                $dbOptions['password']
+            );
+            // установка кодировки
+            $this->pdo->exec('SET NAMES UTF8'); 
+
+        } catch (\PDOException $e) {
+            throw new DbException('Ошибка при подключении к базе данных: ' . $e->getMessage());
+
+        }
     }
 
     public static function getInstance(): self 
