@@ -5,6 +5,7 @@ return [
     '~^products/all$~' => [\Src\Controllers\ProductController::class, 'all'],
     '~^product/(.*)$~' => [\Src\Controllers\ProductController::class, 'show'],
     '~^articles/all$~' => [\Src\Controllers\ArticlesController::class, 'all'],
+    '~^articles/add$~' => [\Src\Controllers\ArticlesController::class, 'add'],
     '~^articles/(\d+)/edit$~' => [\Src\Controllers\ArticlesController::class, 'edit'],
     '~^articles/(\d+)$~' => [\Src\Controllers\ArticlesController::class, 'view'],
     '~^users/all$~' => [\Src\Controllers\UsersController::class, 'all'],

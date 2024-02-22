@@ -75,6 +75,25 @@ abstract class ActiveRecordEntity {
 
     private function insert(array $mappedProperties): void {
         // Здесь создаем новую запись в базе
+        // Убираем null в массиве mappedProperties через array_filter
+        $filteredProperties = array_filter($mappedProperties);
+        $columns = [];
+        $paramsNames = [];
+        $params2values = [];
+        foreach ($filteredProperties as $columnName => $value) {
+            $columns[] = '`' . $columnName . '`';
+            $paramName = ':' . $columnName;
+            $paramsNames[] = $paramName;
+            $params2values[$paramName] = $value;
+        }
+        $columnsViaSemicolon = implode(', ', $columns);
+        $paramsNamesViaSemicolon = implode(', ', $paramsNames);
+        // 'INSERT INTO articles (`name`, `text`, `author_id`) VALUES (:name, :text, :author_id);'
+        $sql = 'INSERT INTO ' . static::getTableName() . ' (' . $columnsViaSemicolon . ') VALUES (' . $paramsNamesViaSemicolon . ');';
+        $db = Db::getInstance();
+        
+        $db->query($sql, $params2values, static::class);
+        $this->id = $db->getLastInsertId();
     }
 
     private function mapPropertiesToDbFormat(): array {
@@ -83,10 +102,8 @@ abstract class ActiveRecordEntity {
         $mappedProperties = [];
         foreach ($properties as $property) {
             // в property лежат все поля свойств 
-            // var_dump($property);
             $propertyName = $property->getName();
             // в propertyName лежат все названия полей
-            // var_dump($propertyName);
             $propertyNameAsUnderscore = $this->camelCaseToUnderscore($propertyName);
             $mappedProperties[$propertyNameAsUnderscore] = $this->$propertyName;
         }

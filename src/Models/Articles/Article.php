@@ -25,6 +25,9 @@ class Article extends ActiveRecordEntity {
     public function setText(string $text): void {
         $this->text = $text;
     }
+    public function setAuthor(User $author): void {
+        $this->authorId = $author->getId();
+    }
 
     public function getAuthorId(): int {
         // (int) - приведение к типу int

@@ -3,6 +3,7 @@
 namespace Src\Controllers;
 
 use Src\Models\Articles\Article;
+use Src\Models\Users\User;
 
 class ArticlesController extends Controller
 {
@@ -37,6 +38,16 @@ class ArticlesController extends Controller
         // $article->setName('Новое название статьи');
         // $article->setText('Новый текст статьи');
         // $article->save();
+    }
+
+    public function add(): void {
+        $author = User::getById(1);
+        $article = new Article();
+        $article->setAuthor($author);
+        $article->setName('Еще одна статья');
+        $article->setText('Текст еще одной статьи');
+        $article->save();
+        var_dump($article);
     }
 
 }
