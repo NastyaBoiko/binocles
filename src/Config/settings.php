@@ -3,7 +3,7 @@
 return [
     'db' => [
         'host' => 'localhost',
-        'dbname' => 'binocle',
+        'dbname' => 'binocles',
         'user' => 'root',
         'password' => ''
     ]

@@ -18,8 +18,7 @@ try {
     }
     
     if (!$isRouteFound) {
-        echo 'Страница не найдена!';
-        return;
+        throw new Src\Exceptions\NotFoundException();
     }
     
     $controllerName = $controllerAndAction[0];
@@ -31,4 +30,7 @@ try {
 } catch(\Src\Exceptions\DbException $e) {
     $view = new \Src\Views\View('default');
     $view->renderHtml('errors/500.php', ['error' => $e->getMessage()], 500);
+} catch(\Src\Exceptions\NotFoundException $e) {
+    $view = new \Src\Views\View('default');
+    $view->renderHtml('errors/404.php', ['error' => $e->getMessage()], 404);
 }
