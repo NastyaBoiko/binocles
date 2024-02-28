@@ -3,6 +3,7 @@
 namespace Src\Controllers;
 
 use Src\Models\Users\User;
+use Src\Views\View;
 
 class UsersController extends Controller
 {
@@ -12,6 +13,9 @@ class UsersController extends Controller
         $users = User::findAll();
         // var_dump($users);
         $this->view->renderHtml('Users/all.php', ['users' => $users]);
+    }
+    public function signUp() {
+        echo 'Регистрация';
     }
 
 }

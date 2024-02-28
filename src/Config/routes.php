@@ -10,5 +10,6 @@ return [
     '~^articles/(\d+)/delete$~' => [\Src\Controllers\ArticlesController::class, 'delete'],
     '~^articles/(\d+)$~' => [\Src\Controllers\ArticlesController::class, 'view'],
     '~^users/all$~' => [\Src\Controllers\UsersController::class, 'all'],
+    '~^users/register$~' => [\Src\Controllers\UsersController::class, 'signUp'],
     '~^$~' => [\Src\Controllers\MainController::class, 'main'],
 ];
