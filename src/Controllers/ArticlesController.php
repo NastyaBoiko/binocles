@@ -24,8 +24,10 @@ class ArticlesController extends Controller
     public function all()
     {
         $articles = Article::findAll();
-        // var_dump($articles);
-        $this->view->renderHtml('Articles/all.php', ['articles' => $articles]);
+        
+        $this->view->renderHtml('Articles/all.php', [
+            'articles' => $articles,
+        ]);
     }
 
     public function edit(int $articleId): void {

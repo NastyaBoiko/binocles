@@ -4,6 +4,7 @@ namespace Src\Controllers;
 
 use Src\Exceptions\InvalidArgumentException;
 use Src\Models\Users\User;
+use Src\Models\Users\UsersAuthService;
 
 class UsersController extends Controller
 {
@@ -22,13 +23,28 @@ class UsersController extends Controller
                 return;
             }
             if ($user instanceof User) {
-                $this->view->renderHtml('users/signUpSuccessful.php');
+                $this->view->renderHtml('Users/signUpSuccessful.php');
                 return;
             }
         } 
         
         $this->view->renderHtml('Users/signUp.php');
+    }
 
+    public function login() 
+    {
+        if (!empty($_POST)) {
+            try {
+                $user = User::login($_POST);
+                UsersAuthService::createToken($user);
+                header('Location: /binocles/articles/all');
+                exit();
+            } catch (InvalidArgumentException $e) {
+                $this->view->renderHtml('Users/login.php', ['error' => $e->getMessage()]);
+                return;
+            }
+        }
+        $this->view->renderHtml('Users/login.php');
     }
 
 }
