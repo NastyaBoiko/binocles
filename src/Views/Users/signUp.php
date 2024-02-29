@@ -5,15 +5,15 @@
 <?php endif;?>
 <form action="/binocles/users/register" method="post">
     <label>
-        Nickname <input type="text" name="nickname" value="<?= $_POST['nickname'] ?>">
+        Nickname <input type="text" name="nickname" value="<?= $_POST['nickname'] ?? '' ?>">
     </label>
     <br><br>
     <label>
-        Email <input type="text" name="email" value="<?= $_POST['email'] ?>">
+        Email <input type="text" name="email" value="<?= $_POST['email'] ?? '' ?>">
     </label>
     <br><br>
     <label>
-        Password <input type="password" name="password" value="<?= $_POST['password'] ?>">
+        Password <input type="password" name="password" value="<?= $_POST['password'] ?? '' ?>">
     </label>
     <br><br>
     <input type="submit" value="Зарегистрироваться">

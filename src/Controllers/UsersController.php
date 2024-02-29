@@ -19,10 +19,16 @@ class UsersController extends Controller
                 $user = User::signUp($_POST);
             } catch (InvalidArgumentException $e) {
                 $this->view->renderHtml('Users/signUp.php', ['error' => $e->getMessage()]);
+                return;
             }
-        } else {
-            $this->view->renderHtml('Users/signUp.php');
-        }
+            if ($user instanceof User) {
+                $this->view->renderHtml('users/signUpSuccessful.php');
+                return;
+            }
+        } 
+        
+        $this->view->renderHtml('Users/signUp.php');
+
     }
 
 }
