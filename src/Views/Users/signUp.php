@@ -16,5 +16,9 @@
         Password <input type="password" name="password" value="<?= $_POST['password'] ?? '' ?>">
     </label>
     <br><br>
+    <label>
+        Password repeat <input type="password" name="password_repeat" value="<?= $_POST['password_repeat'] ?? '' ?>">
+    </label>
+    <br><br>
     <input type="submit" value="Зарегистрироваться">
 </form>

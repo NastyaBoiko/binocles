@@ -56,6 +56,9 @@ class User extends ActiveRecordEntity {
         if (mb_strlen($userData['password']) < 8) {
             throw new InvalidArgumentException('Пароль должен содержать не менее 8 символов');
         }
+        if ($userData['password'] !== $userData['password_repeat']) {
+            throw new InvalidArgumentException('Пароли не совпадают');
+        }
 
         $user = new User();
         $user->nickname = $userData['nickname'];
@@ -78,10 +81,11 @@ class User extends ActiveRecordEntity {
         }
         $user = User::findOneByColumn('email', $loginData['email']);
         if ($user === null) {
-            throw new InvalidArgumentException('Нет пользователя с таким email');
+            // Нет пользователя с таким email
+            throw new InvalidArgumentException('Неправильный логин или пароль');
         }
         if (!password_verify($loginData['password'], $user->getPasswordHash())) {
-            throw new InvalidArgumentException('Неправильный пароль');
+            throw new InvalidArgumentException('Неправильный логин или пароль');
         }
         if (!$user->isConfirmed) {
             throw new InvalidArgumentException('Пользователь не подтвержден');
