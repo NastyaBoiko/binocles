@@ -18,7 +18,6 @@ class View {
 
     public function renderHtml(string $viewName, array $vars = [], int $code = 200) {
         http_response_code($code);
-        extract($this->extraVars);
         $layoutFile = "Layouts/{$this->layout}.php";
         // Тут достается из конечного вью html разметка с подстановкой articles (за счет extract)
         $content = $this->renderFile($viewName, $vars);
@@ -26,6 +25,7 @@ class View {
     }
 
     private function renderFile(string $fileName, array $vars) {
+        extract($this->extraVars);
         extract($vars);
         $fileName = __DIR__ . '/' . $fileName;
         if (file_exists($fileName)) {
