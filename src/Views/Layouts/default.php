@@ -38,15 +38,15 @@
                     </li>
                     </ul>
                 </div>
-                <?= !empty($user) ? 'Привет, ' . $user->getNickname() : 'Войдите на сайт'; 
-                if (empty($user)):
-                ?>
                 <div class="buttons">
+                <?= !empty($user) ? 'Привет, ' . $user->getNickname() : 'Войдите на сайт'; 
+                    if (empty($user)): ?>
                     <a href="/binocles/users/register" type="button" class="btn btn-outline-success">Зарегистрироваться</a>
                     <a href="/binocles/users/login" type="button" class="btn btn-outline-success">Войти</a>
-                    <!-- <a href="#" type="button" class="btn btn-outline-secondary">Выйти</a> -->
+                    <?php else: ?>
+                    <a href="/binocles/users/logout" type="button" class="btn btn-outline-secondary">Выйти</a>
+                    <?php endif; ?>
                 </div>
-                <?php endif; ?>
             </div>
         </nav>
     </header>

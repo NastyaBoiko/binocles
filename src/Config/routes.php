@@ -12,5 +12,6 @@ return [
     '~^users/all$~' => [\Src\Controllers\UsersController::class, 'all'],
     '~^users/register$~' => [\Src\Controllers\UsersController::class, 'signUp'],
     '~^users/login$~' => [\Src\Controllers\UsersController::class, 'login'],
+    '~^users/logout$~' => [\Src\Controllers\UsersController::class, 'logout'],
     '~^$~' => [\Src\Controllers\MainController::class, 'main'],
 ];

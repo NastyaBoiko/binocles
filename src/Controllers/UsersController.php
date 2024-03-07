@@ -47,4 +47,10 @@ class UsersController extends Controller
         $this->view->renderHtml('Users/login.php');
     }
 
+    public function logout() 
+    {
+        setcookie('token', '', -1, '/', '', false, true);
+        header('Location: /binocles/articles/all');
+        exit();
+    }
 }
