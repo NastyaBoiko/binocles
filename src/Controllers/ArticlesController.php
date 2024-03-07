@@ -62,13 +62,6 @@ class ArticlesController extends Controller
 
         $this->view->renderHtml('Articles/add.php');
 
-        // $author = User::getById(1);
-        // $article = new Article();
-        // $article->setAuthor($author);
-        // $article->setName('Еще одна статья');
-        // $article->setText('Текст еще одной статьи');
-        // $article->save();
-        // var_dump($article);
     }
 
     // void значит нет return
