@@ -12,5 +12,5 @@
         Текст статьи <textarea name="text" id="text" rows="10" cols="80" value="<?= $_POST['text'] ?? '' ?>"></textarea>
     <br><br>
 
-    <input type="submit" value="Создать">
+    <input type="submit" class="btn btn-primary mb-3" value="Создать">
 </form>

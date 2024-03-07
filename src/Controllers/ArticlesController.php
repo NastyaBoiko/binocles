@@ -37,6 +37,20 @@ class ArticlesController extends Controller
         if ($article === null) {
             throw new NotFoundException();
         }
+        if ($this->user === null) {
+            throw new UnauthorizedException();
+        }
+        if (!empty($_POST)) {
+
+            try {
+                $article->updateArticle($_POST);
+            } catch (InvalidArgumentException $e) {
+                $this->view->renderHtml('Articles/edit.php', ['error' => $e->getMessage(), 'article' => $article]);
+                return;
+            }
+            header('Location: /binocles/articles/' . $article->getId(), true, 302);
+            exit();
+        }
         $this->view->renderHtml('Articles/edit.php', ['article' => $article]);
         // $article->setName('Новое название статьи');
         // $article->setText('Новый текст статьи');
