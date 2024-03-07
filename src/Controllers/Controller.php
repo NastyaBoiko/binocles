@@ -7,7 +7,7 @@ use \Src\Views\View;
 
 class Controller 
 {
-    private $user;
+    protected $user;
     // protected чтобы можно было обращаться из дочернего класса
     protected $view;
 

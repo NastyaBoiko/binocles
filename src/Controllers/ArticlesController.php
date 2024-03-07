@@ -2,7 +2,9 @@
 
 namespace Src\Controllers;
 
+use Src\Exceptions\InvalidArgumentException;
 use Src\Exceptions\NotFoundException;
+use Src\Exceptions\UnauthorizedException;
 use Src\Models\Articles\Article;
 use Src\Models\Users\User;
 
@@ -42,12 +44,30 @@ class ArticlesController extends Controller
     }
 
     public function add(): void {
-        $author = User::getById(1);
-        $article = new Article();
-        $article->setAuthor($author);
-        $article->setName('Еще одна статья');
-        $article->setText('Текст еще одной статьи');
-        $article->save();
+        if ($this->user === null) {
+            throw new UnauthorizedException();
+        }
+
+        if (!empty($_POST)) {
+            try {
+                $article = Article::createArticle($_POST, $this->user);
+            } catch (InvalidArgumentException $e) {
+                $this->view->renderHtml('Articles/add.php', ['error' => $e->getMessage()]);
+                return;
+            }
+            header('Location: /binocles/articles/' . $article->getId(), true, 302);
+            exit();
+        }
+
+
+        $this->view->renderHtml('Articles/add.php');
+
+        // $author = User::getById(1);
+        // $article = new Article();
+        // $article->setAuthor($author);
+        // $article->setName('Еще одна статья');
+        // $article->setText('Текст еще одной статьи');
+        // $article->save();
         // var_dump($article);
     }
 
