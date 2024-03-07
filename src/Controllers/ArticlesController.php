@@ -52,9 +52,6 @@ class ArticlesController extends Controller
             exit();
         }
         $this->view->renderHtml('Articles/edit.php', ['article' => $article]);
-        // $article->setName('Новое название статьи');
-        // $article->setText('Новый текст статьи');
-        // $article->save();
     }
 
     public function add(): void {
