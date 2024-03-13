@@ -138,4 +138,5 @@ abstract class ActiveRecordEntity {
 
     // абстрактный метод реализуется в классах-наследниках
     abstract protected static function getTableName(): string;
+
 }

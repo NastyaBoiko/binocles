@@ -2,8 +2,8 @@
 
 return [
     '~^hello/(.*)$~' => [\Src\Controllers\MainController::class, 'sayHello'],
-    '~^products/all$~' => [\Src\Controllers\ProductController::class, 'all'],
-    '~^product/(.*)$~' => [\Src\Controllers\ProductController::class, 'show'],
+    // '~^products/all$~' => [\Src\Controllers\ProductController::class, 'all'],
+    // '~^product/(.*)$~' => [\Src\Controllers\ProductController::class, 'show'],
     '~^articles/all$~' => [\Src\Controllers\ArticlesController::class, 'all'],
     '~^articles/add$~' => [\Src\Controllers\ArticlesController::class, 'add'],
     '~^articles/(\d+)/edit$~' => [\Src\Controllers\ArticlesController::class, 'edit'],
@@ -13,5 +13,7 @@ return [
     '~^users/register$~' => [\Src\Controllers\UsersController::class, 'signUp'],
     '~^users/login$~' => [\Src\Controllers\UsersController::class, 'login'],
     '~^users/logout$~' => [\Src\Controllers\UsersController::class, 'logout'],
+    '~^categories/all$~' => [\Src\Controllers\ProductsController::class, 'all'],
+    '~^categories/(\d+)$~' => [\Src\Controllers\ProductsController::class, 'view'],
     '~^$~' => [\Src\Controllers\MainController::class, 'main'],
 ];
