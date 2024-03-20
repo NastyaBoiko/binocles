@@ -5,7 +5,6 @@ namespace Src\Controllers;
 use Src\Exceptions\NotFoundException;
 use Src\Models\Products\Product;
 use Src\Models\Categories\Category;
-use Src\Models\Users\User;
 
 class ProductsController extends Controller
 {
@@ -19,18 +18,18 @@ class ProductsController extends Controller
         ]);
     }
 
-    public function view(int $categoryId)
+    public function view(int $productId)
     {
-        $products = Product::getByCategoryId($categoryId);
-        $category = Category::getById($categoryId);
+        $product = Product::getById($productId);
+        $category = Category::getById($product->getCategoryId());
 
-        if ($products === null) {
+        if ($product === null) {
             // Здесь обработка ошибки
             throw new NotFoundException();
         }
 
-        $this->view->renderHtml('Categories/view.php', [
-            'products' => $products,
+        $this->view->renderHtml('Products/view.php', [
+            'product' => $product,
             'category' => $category
         ]);
     }

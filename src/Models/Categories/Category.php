@@ -17,7 +17,7 @@ class Category extends ActiveRecordEntity {
         return $this->title;
     }
     public function getDescription(): string {
-        return $this->content;
+        return $this->description;
     }
 
     protected static function getTableName(): string {

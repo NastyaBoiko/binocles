@@ -13,7 +13,8 @@ return [
     '~^users/register$~' => [\Src\Controllers\UsersController::class, 'signUp'],
     '~^users/login$~' => [\Src\Controllers\UsersController::class, 'login'],
     '~^users/logout$~' => [\Src\Controllers\UsersController::class, 'logout'],
-    '~^categories/all$~' => [\Src\Controllers\ProductsController::class, 'all'],
-    '~^categories/(\d+)$~' => [\Src\Controllers\ProductsController::class, 'view'],
+    '~^categories/all$~' => [\Src\Controllers\CategoriesController::class, 'all'],
+    '~^categories/(\d+)$~' => [\Src\Controllers\CategoriesController::class, 'view'],
+    '~^products/(\d+)$~' => [\Src\Controllers\ProductsController::class, 'view'],
     '~^$~' => [\Src\Controllers\MainController::class, 'main'],
 ];

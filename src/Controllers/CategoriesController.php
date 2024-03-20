@@ -3,8 +3,8 @@
 namespace Src\Controllers;
 
 use Src\Exceptions\NotFoundException;
+use Src\Models\Products\Product;
 use Src\Models\Categories\Category;
-use Src\Models\Users\User;
 
 class CategoriesController extends Controller
 {
@@ -12,23 +12,24 @@ class CategoriesController extends Controller
     public function all()
     {
         $categories = Category::findAll();
-        
         $this->view->renderHtml('Categories/all.php', [
-            'categories' => $categories,
+          'categories' => $categories,
         ]);
     }
 
     public function view(int $categoryId)
     {
-        $categories = Category::getByCategoryId($categoryId);
+        $products = Product::getByCategoryId($categoryId);
+        $category = Category::getById($categoryId);
 
-        if ($categories === null) {
+        if ($products === null) {
             // Здесь обработка ошибки
             throw new NotFoundException();
         }
 
-        $this->view->renderHtml('Categories/all.php', [
-            'categories' => $categories
+        $this->view->renderHtml('Categories/view.php', [
+            'products' => $products,
+            'category' => $category
         ]);
     }
 

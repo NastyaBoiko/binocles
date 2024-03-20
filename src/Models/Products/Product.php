@@ -19,12 +19,28 @@ class Product extends ActiveRecordEntity {
     protected $img;
     protected $isOffer;
 
+    public function getCategoryId(): string {
+      return $this->categoryId;
+    }
     public function getTitle(): string {
         return $this->title;
     }
     public function getContent(): string {
         return $this->content;
     }
+    public function getPrice(): string {
+        return $this->price;
+    }
+    public function getOldPrice(): string {
+        return $this->oldPrice;
+    }
+    public function getDescription(): string {
+        return $this->description;
+    }
+    public function getImg(): string {
+        return $this->img;
+    }
+    
 
     protected static function getTableName(): string {
         return 'products';
