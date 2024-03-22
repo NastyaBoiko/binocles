@@ -1,8 +1,10 @@
 <?php
-try {
 
-    spl_autoload_register();
-    
+spl_autoload_register(function (string $className) { 
+    require_once __DIR__ . '/' . str_replace('\\', '/', $className) . '.php';
+});
+
+try {
     $route = $_GET['route'] ?? '';
     
     $routes = require __DIR__ . '/src/config/routes.php';

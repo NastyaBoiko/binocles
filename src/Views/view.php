@@ -2,6 +2,7 @@
 
 namespace Src\Views;
 
+
 class View {
     private $layout;
     private $extraVars = [];
