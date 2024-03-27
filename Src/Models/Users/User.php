@@ -60,7 +60,7 @@ class User extends ActiveRecordEntity {
         if ($userData['password'] !== $userData['password_repeat']) {
             throw new InvalidArgumentException('Пароли не совпадают');
         }
-        if ($userData['password'] === mb_strtolower($userData['password'])) {
+        if (!preg_match('/[A-ZА-Я]+/', $userData['password'])) {
             throw new InvalidArgumentException('В пароле должна быть заглавная буква!');
         }
         if (!preg_match('/[a-zа-я]+/', $userData['password'])) {
