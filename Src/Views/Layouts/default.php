@@ -24,7 +24,7 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/binocles/categories/all">Каталог</a>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link" href="#">Акции</a>
                     </li>
                     <li class="nav-item">
@@ -35,8 +35,14 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">О компании</a>
-                    </li>
+                    </li> -->
                     </ul>
+                </div>
+                <div class="search">
+                    <form action="/search" method="get">
+                        <input type="search" name="q">
+                        <button class="btn btn-outline-success" type="submit">Искать</button>
+                    </form>
                 </div>
                 <div class="buttons">
                 <?= !empty($user) ? 'Привет, ' . $user->getNickname() : 'Войдите на сайт'; 

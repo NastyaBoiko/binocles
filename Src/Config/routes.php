@@ -16,5 +16,6 @@ return [
     '~^categories/all$~' => [\Src\Controllers\CategoriesController::class, 'all'],
     '~^categories/(\d+)$~' => [\Src\Controllers\CategoriesController::class, 'view'],
     '~^products/(\d+)$~' => [\Src\Controllers\ProductsController::class, 'view'],
+    '~^search$~' => [\Src\Controllers\CategoriesController::class, 'search'],
     '~^$~' => [\Src\Controllers\MainController::class, 'main'],
 ];

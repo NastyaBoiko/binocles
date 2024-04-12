@@ -57,4 +57,17 @@ class Product extends ActiveRecordEntity {
         return $entities ? $entities : null;
     }
     
+    public static function search($searchString) {
+        $db = Db::getInstance();
+        $products = $db->query(
+            "SELECT * FROM products WHERE title LIKE $searchString",
+            [],
+            static::class
+        );
+        if ($products) {
+            return $products;
+        } else {
+            return null;
+        }
+    }
 }
