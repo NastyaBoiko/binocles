@@ -42,7 +42,7 @@ class CategoriesController extends Controller
             $searchProducts = Product::search($_GET['q']);
             $this->view->renderHtml('Categories/search.php', ['searchProducts' => $searchProducts, 'q' => $_GET['q']]);
         }
-        $this->view->renderHtml('Categories/search.php');
+        // $this->view->renderHtml('Categories/search.php');
     }
 
 }

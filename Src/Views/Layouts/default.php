@@ -39,8 +39,8 @@
                     </ul>
                 </div>
                 <div class="search">
-                    <form action="/search" method="get">
-                        <input type="search" name="q">
+                    <form action="/binocles/search" style="display:flex; align-items:center; justify-content: space-between;" method="get">
+                        <input type="search" class="form-control" style="width:70%; display:inline" name="q">
                         <button class="btn btn-outline-success" type="submit">Искать</button>
                     </form>
                 </div>

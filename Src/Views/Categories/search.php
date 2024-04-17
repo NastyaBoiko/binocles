@@ -2,10 +2,10 @@
 <p>по запросу <?= $q ?? '' ?></p>
 <?php if (isset($searchProducts)): ?>
     <?php foreach($searchProducts as $k => $val): ?>
-        <h3><?= $val->title ?></h3>
-        <img src="/img/<?= $val->img ?>" alt="Фото продукта">
-        <p><?= $val->content ?></p>
-        <p><?= $val->price ?></p>
+        <h3><?= $val->getTitle() ?></h3>
+        <img height="150px" src="/binocles/img/<?= $val->getImg() ?>" alt="Фото продукта">
+        <p><?= $val->getContent() ?></p>
+        <p><?= $val->getPrice() ?></p>
     <?php endforeach; ?>
 <?php else: ?>
     <p>Ничего не найдено</p>
