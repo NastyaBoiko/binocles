@@ -3,7 +3,8 @@
 namespace Src\Views;
 
 
-class View {
+class View
+{
     private $layout;
     private $extraVars = [];
 
@@ -17,7 +18,8 @@ class View {
         $this->extraVars[$name] = $value;
     }
 
-    public function renderHtml(string $viewName, array $vars = [], int $code = 200) {
+    public function renderHtml(string $viewName, array $vars = [], int $code = 200)
+    {
         http_response_code($code);
         $layoutFile = "Layouts/{$this->layout}.php";
         // Тут достается из конечного вью html разметка с подстановкой articles (за счет extract)
@@ -25,20 +27,29 @@ class View {
         echo $this->renderFile($layoutFile, ['content' => $content]);
     }
 
-    private function renderFile(string $fileName, array $vars) {
+    private function renderFile(string $fileName, array $vars)
+    {
         extract($this->extraVars);
         extract($vars);
         $fileName = __DIR__ . '/' . $fileName;
         if (file_exists($fileName)) {
             // Буферизированный вывод
             ob_start();
-                // Include видит предыдущее окружение $articles из extract($vars);
-                include $fileName;
-                $buffer = ob_get_contents();
+            // Include видит предыдущее окружение $articles из extract($vars);
+            include $fileName;
+            $buffer = ob_get_contents();
             ob_get_clean();
             return $buffer;
         } else {
-            echo "Не найден файл пути $fileName"; die();
+            echo "Не найден файл пути $fileName";
+            die();
         }
+    }
+
+    public function displayJson($data, int $code = 200)
+    {
+        header('Content-type: application/json; charset=utf-8');
+        http_response_code($code);
+        echo json_encode($data);
     }
 }
