@@ -50,36 +50,32 @@ class ArticlesApiController extends Controller
 
     public function edit(int $articleId)
     {
-        if (METHOD === 'PUT' || METHOD === 'PATCH') {
-            $input = $this->getInputData();
-            $article = Article::getById($articleId);
+        $input = $this->getInputData();
+        $article = Article::getById($articleId);
 
-            if ($article === null) {
-                throw new NotFoundException("Article not found");
-            }
-
-            $articleFromRequest = $input['article'][0];
-            // var_dump($articleFromRequest);
-            $article->updateArticle($articleFromRequest);
-
-            header('Location: /binocles/api/articles/' . $article->getId(), true, 302);
-        } else {
-            throw new WrongMethodException('Choose method PUT or PATCH to edit');
+        if ($article === null) {
+            throw new NotFoundException("Article not found");
         }
+
+        $articleFromRequest = $input['article'][0];
+        // var_dump($articleFromRequest);
+        $article->updateArticle($articleFromRequest);
+
+        header('Location: /binocles/api/articles/' . $article->getId(), true, 302);
     }
 
     public function delete(int $articleId)
     {
-        if (METHOD === 'DELETE') {
-            $article = Article::getById($articleId);
-            if ($article === null) {
-                throw new NotFoundException('Article already deleted');
-            }
-
-            $article->delete();
-            echo "Article $articleId deleted";
-        } else {
-            throw new WrongMethodException('Choose method DELETE to delete');
+        $article = Article::getById($articleId);
+        if ($article === null) {
+            throw new NotFoundException('Article already deleted');
         }
+
+        $article->delete();
+
+        $this->view->displayJson([
+            'method' => 'DELETE',
+            'id' => $articleId
+        ]);
     }
 }

@@ -1,11 +1,14 @@
 <?php
 
+use Src\Exceptions\WrongMethodException;
+
 spl_autoload_register(function (string $className) {
     require_once __DIR__ . '/../' . $className . '.php';
 });
 
 try {
-    define('METHOD', $_SERVER['REQUEST_METHOD']);
+    $method = $_SERVER['REQUEST_METHOD'];
+
     $route = $_GET['route'] ?? '';
 
     $routes = require __DIR__ . '/../src/config/routes_api.php';
@@ -26,7 +29,11 @@ try {
 
     unset($matches[0]);
     $controllerName = $controllerAndAction[0];
-    $actionName = $controllerAndAction[1];
+    if (isset($controllerAndAction[$method])) {
+        $actionName = $controllerAndAction[$method];
+    } else {
+        throw new WrongMethodException('Недоступный метод');
+    }
 
     $controller = new $controllerName();
     $controller->$actionName(...$matches);
