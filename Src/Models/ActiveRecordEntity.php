@@ -148,7 +148,7 @@ abstract class ActiveRecordEntity implements \JsonSerializable
     }
 
     // Сериализация для объектов api
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         return $this->mapPropertiesToDbFormat();
     }
