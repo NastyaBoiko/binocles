@@ -22,4 +22,17 @@ class ArticlesApiController extends Controller
             'article' => [$article]
         ]);
     }
+
+    public function all()
+    {
+        $articles = Article::findAll();
+
+        if ($articles === null) {
+            throw new NotFoundException();
+        }
+
+        $this->view->displayJson([
+            'articles' => [$articles]
+        ]);
+    }
 }
