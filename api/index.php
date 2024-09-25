@@ -5,6 +5,7 @@ spl_autoload_register(function (string $className) {
 });
 
 try {
+    $method = $_SERVER['REQUEST_METHOD'];
     $route = $_GET['route'] ?? '';
     
     $routes = require __DIR__ . '/../src/config/routes_api.php';

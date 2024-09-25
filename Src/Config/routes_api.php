@@ -3,4 +3,5 @@
 return [
     '~^articles/(\d+)$~' => [\Src\Controllers\Api\ArticlesApiController::class, 'view'],
     '~^articles/all$~' => [\Src\Controllers\Api\ArticlesApiController::class, 'all'],
+    '~^articles/add$~' => [\Src\Controllers\Api\ArticlesApiController::class, 'add'],
 ];

@@ -19,7 +19,7 @@ class ArticlesApiController extends Controller
         }
 
         $this->view->displayJson([
-            'article' => [$article]
+            'article' => $article
         ]);
     }
 
@@ -32,7 +32,18 @@ class ArticlesApiController extends Controller
         }
 
         $this->view->displayJson([
-            'articles' => [$articles]
+            'articles' => $articles
         ]);
+    }
+
+    public function add()
+    {
+        $input = $this->getInputData();
+        $articleFromRequest = $input['articles'][0];
+        $authorId = $articleFromRequest['author_id'];
+        $author = User::getById($authorId);
+        $article = Article::createArticle($articleFromRequest, $author);
+
+        header('Location: /binocles/api/articles/' . $article->getId(), true, 302);
     }
 }

@@ -19,4 +19,13 @@ class Controller
         $this->view = new View($this->layout);
         $this->view->setVar('user', $this->user);
     }
+
+    // Достает данные при передаче в теле запроса и декодирует
+    public function getInputData() {
+        return json_decode(
+            file_get_contents('php://input'),
+            true
+        );
+        
+    }
 }

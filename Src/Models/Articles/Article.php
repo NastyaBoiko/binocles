@@ -55,6 +55,7 @@ class Article extends ActiveRecordEntity {
         $article->save();
         return $article;
     }
+
     public function updateArticle(array $fields): Article {
         if (empty($fields['name'])) {
             throw new InvalidArgumentException('Не передано название статьи');
@@ -68,4 +69,6 @@ class Article extends ActiveRecordEntity {
         $this->save();
         return $this;
     }
+
+    
 }
