@@ -29,11 +29,10 @@ try {
 
     unset($matches[0]);
     $controllerName = $controllerAndAction[0];
-    if (isset($controllerAndAction[$method])) {
-        $actionName = $controllerAndAction[$method];
-    } else {
+    if (!isset($controllerAndAction[$method])) {
         throw new WrongMethodException('Недоступный метод');
     }
+    $actionName = $controllerAndAction[$method];
 
     $controller = new $controllerName();
     $controller->$actionName(...$matches);
