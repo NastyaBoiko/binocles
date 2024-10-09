@@ -25,9 +25,9 @@ class GoodsApiController extends Controller
 
     public function all()
     {
-        $articles = Good::findAll();
+        $goods = Good::findAll();
 
-        if ($articles === null) {
+        if ($goods === null) {
             throw new NotFoundException();
         }
 
@@ -60,7 +60,7 @@ class GoodsApiController extends Controller
         // var_dump($articleFromRequest);
         $good->updateGood($goodFromRequest);
 
-        header('Location: /binocles/api/good/' . $good->getId(), true, 302);
+        header('Location: /binocles/api/goods/' . $good->getId(), true, 302);
     }
 
     public function delete(int $goodId)

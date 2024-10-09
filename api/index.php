@@ -48,4 +48,7 @@ try {
 } catch (\Src\Exceptions\WrongMethodException $e) {
     $view = new \Src\Views\View('default');
     $view->displayJson(['error' => $e->getMessage()], 405);
+} catch (\Src\Exceptions\InvalidArgumentException $e) {
+    $view = new \Src\Views\View('default');
+    $view->displayJson(['error' => $e->getMessage()], 400);
 }
