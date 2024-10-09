@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.3
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Мар 14 2024 г., 00:28
--- Версия сервера: 8.0.29
--- Версия PHP: 8.0.18
+-- Время создания: Окт 09 2024 г., 13:18
+-- Версия сервера: 8.0.30
+-- Версия PHP: 8.1.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -73,6 +73,27 @@ INSERT INTO `categories` (`id`, `parent_id`, `title`, `description`) VALUES
 (4, 0, 'Подзорные трубы', NULL),
 (5, 1, 'Оптические прицелы', NULL),
 (6, 1, 'Коллиматорные прицелы', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `goods`
+--
+
+CREATE TABLE `goods` (
+  `id` int NOT NULL,
+  `owner_id` int NOT NULL,
+  `title` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `description` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Дамп данных таблицы `goods`
+--
+
+INSERT INTO `goods` (`id`, `owner_id`, `title`, `description`, `image`) VALUES
+(1, 1, 'title1', 'desc', 'ggg.png');
 
 -- --------------------------------------------------------
 
@@ -154,6 +175,12 @@ ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Индексы таблицы `goods`
+--
+ALTER TABLE `goods`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Индексы таблицы `products`
 --
 ALTER TABLE `products`
@@ -182,6 +209,12 @@ ALTER TABLE `articles`
 --
 ALTER TABLE `categories`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT для таблицы `goods`
+--
+ALTER TABLE `goods`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT для таблицы `products`
