@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Окт 09 2024 г., 13:18
+-- Время создания: Окт 09 2024 г., 16:09
 -- Версия сервера: 8.0.30
 -- Версия PHP: 8.1.9
 
@@ -40,7 +40,7 @@ CREATE TABLE `articles` (
 --
 
 INSERT INTO `articles` (`id`, `author_id`, `name`, `text`, `created_at`) VALUES
-(1, 1, 'Новое название статьи', 'Новый текст статьи', '2024-02-15 09:24:04'),
+(1, 1, 'title1', 'desc', '2024-02-15 09:24:04'),
 (2, 1, 'Пост о жизни', 'Сидел я тут на кухне с друганом и тут он задал такой вопрос...', '2024-02-15 09:24:04'),
 (3, 1, 'Еще одна статья', 'Текст еще одной статьи', '2024-02-22 09:56:31'),
 (4, 1, 'Еще одна статья', 'Текст еще одной статьи', '2024-02-22 10:47:38'),
@@ -83,17 +83,23 @@ INSERT INTO `categories` (`id`, `parent_id`, `title`, `description`) VALUES
 CREATE TABLE `goods` (
   `id` int NOT NULL,
   `owner_id` int NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `description` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `image` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `amount` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Дамп данных таблицы `goods`
 --
 
-INSERT INTO `goods` (`id`, `owner_id`, `title`, `description`, `image`) VALUES
-(1, 1, 'title1', 'desc', 'ggg.png');
+INSERT INTO `goods` (`id`, `owner_id`, `title`, `description`, `image`, `amount`) VALUES
+(1, 1, 'Фреза', 'Токарная', 'ggg8.png', 12),
+(3, 2, 'titleNEW3', 'descNew3', 'ggg3.png', 0),
+(4, 5, 'titleNEW4', 'descNew4', 'ggg4.png', 0),
+(6, 5, 'titleNEW4', 'descNew4', 'ggg4.png', 4),
+(8, 1, '8800', 'd8', 'ggg8.png', 8),
+(9, 5, 'Фреза новая', 'Токарная', 'фреза.png', 10);
 
 -- --------------------------------------------------------
 
@@ -214,7 +220,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT для таблицы `goods`
 --
 ALTER TABLE `goods`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT для таблицы `products`
