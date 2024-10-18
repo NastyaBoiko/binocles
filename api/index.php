@@ -33,7 +33,12 @@ try {
 
     unset($matches[0]);
     $controllerName = $controllerAndAction[0];
-    if (!isset($controllerAndAction[$method]) && $method !== 'OPTIONS') {
+
+    if ($method == 'OPTIONS') {
+        exit();
+    }
+
+    if (!isset($controllerAndAction[$method])) {
         throw new WrongMethodException('Недоступный метод');
     }
     $actionName = $controllerAndAction[$method];
