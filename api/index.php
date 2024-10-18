@@ -6,6 +6,10 @@ spl_autoload_register(function (string $className) {
     require_once __DIR__ . '/../' . $className . '.php';
 });
 
+header("Access-Control-Allow-Origin: *"); 
+header("Access-Control-Allow-Methods: GET, HEAD, PUT, PATCH, POST, DELETE, OPTIONS"); 
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
+
 try {
     $method = $_SERVER['REQUEST_METHOD'];
 
@@ -29,7 +33,7 @@ try {
 
     unset($matches[0]);
     $controllerName = $controllerAndAction[0];
-    if (!isset($controllerAndAction[$method])) {
+    if (!isset($controllerAndAction[$method]) && $method !== 'OPTIONS') {
         throw new WrongMethodException('Недоступный метод');
     }
     $actionName = $controllerAndAction[$method];
