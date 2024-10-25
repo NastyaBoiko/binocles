@@ -2,6 +2,12 @@ const url = 'http://localhost/binocles/api/goods';
 
 let container = document.querySelector('.main__container');
 
+let inputId = document.querySelector('#id');
+let inputTitle = document.querySelector('#title');
+let inputDescription = document.querySelector('#description');
+let inputAmount = document.querySelector('#amount');
+let inputImage = document.querySelector('#image');
+
 // Через .then
 
 // fetch(url, {
@@ -54,12 +60,22 @@ async function deleteData(e, item, col) {
     });
 }
 
+function showData(e, item) {
+    e.preventDefault();
+
+    inputId.value = item.id;
+    inputTitle.value = item.title;
+    inputDescription.value = item.description;
+    inputAmount.value = item.amount;
+}
+
 function createCard(item) {
     let col = document.createElement('div');
     col.classList.add('col');
 
     let card = document.createElement('div');
     card.classList.add('card');
+    card.setAttribute('id', item.id);
     // card.style.width = '18rem';
     card.style.marginBottom = '10px';
     
@@ -78,18 +94,34 @@ function createCard(item) {
     let cardText = document.createElement('p');
     cardText.classList.add('card-text');
     cardText.textContent = item.description;
+
+    let cardAmount = document.createElement('p');
+    cardAmount.classList.add('card-text');
+    cardAmount.textContent = `Количество на складе: ${item.amount}`;
     
-    let cardBtn = document.createElement('a');
-    cardBtn.classList.add('btn', 'btn-primary', 'btn__delete');
-    cardBtn.href = "yandex.ru";
-    cardBtn.textContent = 'Удалить';
+    let cardBtnDelete = document.createElement('a');
+    cardBtnDelete.classList.add('btn', 'btn-danger', 'btn__delete');
+    cardBtnDelete.href = "yandex.ru";
+    cardBtnDelete.textContent = 'Удалить';
+
+    let cardBtnUpdate = document.createElement('a');
+    cardBtnUpdate.classList.add('btn', 'btn-warning', 'btn__update');
+    cardBtnUpdate.setAttribute('data-bs-toggle', 'modal');
+    cardBtnUpdate.setAttribute('data-bs-target', '#staticBackdrop');
+    cardBtnUpdate.setAttribute('id', `update${item.id}`);
+    cardBtnUpdate.href = "yandex.ru";
+    cardBtnUpdate.textContent = 'Изменить';
+
+    cardBtnUpdate.addEventListener('click', (e) => showData(e, item));
 
     // console.log(item.id);
-    cardBtn.addEventListener('click', (e) => deleteData(e, item, col));
+    cardBtnDelete.addEventListener('click', (e) => deleteData(e, item, col));
     
     cardBody.appendChild(cardTitle);
     cardBody.appendChild(cardText);
-    cardBody.appendChild(cardBtn);
+    cardBody.appendChild(cardAmount);
+    cardBody.appendChild(cardBtnDelete);
+    cardBody.appendChild(cardBtnUpdate);
     
     card.appendChild(img);
     card.appendChild(cardBody);
@@ -103,4 +135,6 @@ function createCard(item) {
 
 
 fetchData();
+
+
 

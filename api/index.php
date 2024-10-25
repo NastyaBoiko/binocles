@@ -35,10 +35,18 @@ try {
     $controllerName = $controllerAndAction[0];
 
     if ($method == 'OPTIONS') {
+        http_response_code(200);
         exit();
     }
 
+    // Обработка запроса OPTIONS
+    // if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    //     // Если это запрос OPTIONS, просто завершите выполнение
+    //     exit();
+    // }
+
     if (!isset($controllerAndAction[$method])) {
+        echo $method; die;
         throw new WrongMethodException('Недоступный метод');
     }
     $actionName = $controllerAndAction[$method];

@@ -6,7 +6,7 @@ return [
     '~^articles/add$~' => [\Src\Controllers\Api\ArticlesApiController::class, 'POST'  => 'add'],
 
 
-    '~^goods/(\d+)$~' => [\Src\Controllers\Api\GoodsApiController::class, 'GET' => 'view', 'PATCH' => 'edit', 'DELETE' => 'delete'],
+    '~^goods/(\d+)$~' => [\Src\Controllers\Api\GoodsApiController::class, 'GET' => 'view', 'POST' => 'edit', 'DELETE' => 'delete'],
     '~^goods$~' => [\Src\Controllers\Api\GoodsApiController::class, 'GET' => 'all', 'POST'  => 'add'],
 
 ];
