@@ -44,7 +44,9 @@ class GoodsApiController extends Controller
         $owner = User::getById($ownerId);
         $good = Good::createGood($goodFromRequest, $owner);
 
-        header('Location: /binocles/api/goods/' . $good->getId(), true, 302);
+        $this->view->displayJson([
+            'good' => $good
+        ]);
     }
 
     public function edit(int $goodId)
@@ -60,7 +62,9 @@ class GoodsApiController extends Controller
         // var_dump($articleFromRequest);
         $good->updateGood($goodFromRequest);
 
-        header('Location: /binocles/api/goods/' . $good->getId(), true, 302);
+        $this->view->displayJson([
+            'good' => $good
+        ]);
     }
 
     public function delete(int $goodId)

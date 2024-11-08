@@ -23,7 +23,7 @@ updateBtn.addEventListener('click', function(e) {
         console.log(good);
 
         fetch(urlUpd, {
-            method: 'POST',
+            method: 'PATCH',
             body: JSON.stringify(good),
             headers: {
                 "Content-Type": "application/json",
