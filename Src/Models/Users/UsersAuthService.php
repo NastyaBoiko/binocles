@@ -28,4 +28,25 @@ class UsersAuthService
 
         return $user;
     }
+
+    public static function getUserByBearerToken(): ?User 
+    { 
+        // Получаем заголовки
+        $headers = getallheaders();
+        $user = null;
+
+        // Проверяем наличие заголовка авторизации
+        if (isset($headers['Authorization'])) {
+            // Извлекаем токен
+            $authHeader = $headers['Authorization'];
+            $token = str_replace('Bearer ', '', $authHeader); // Предполагаем, что используется Bearer токен
+
+            $user = User::findOneByColumn('auth_token', $token);
+            if ($user === null) {
+                return null;
+            }
+        }
+
+        return $user;
+    }
  }

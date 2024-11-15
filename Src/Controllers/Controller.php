@@ -15,7 +15,7 @@ class Controller
 
     public function __construct()
     {
-        $this->user = UsersAuthService::getUserByToken();
+        $this->user = UsersAuthService::getUserByToken() ?? UsersAuthService::getUserByBearerToken();
         $this->view = new View($this->layout);
         $this->view->setVar('user', $this->user);
     }

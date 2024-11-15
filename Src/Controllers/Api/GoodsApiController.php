@@ -6,13 +6,13 @@ use Src\Models\Users\User;
 use Src\Controllers\Controller;
 use Src\Models\Goods\Good;
 use Src\Exceptions\NotFoundException;
+use Src\Exceptions\UnauthorizedException;
 
 class GoodsApiController extends Controller
 {
     public function view(int $goodId): void
     {
         $good = Good::getById($goodId);
-
 
         if ($good === null) {
             throw new NotFoundException();
@@ -38,6 +38,9 @@ class GoodsApiController extends Controller
 
     public function add()
     {
+        if ($this->user === null) {
+            throw new UnauthorizedException("User not found");
+        }
         $input = $this->getInputData();
         $goodFromRequest = $input['good'][0];
         $ownerId = $goodFromRequest['owner_id'];
@@ -51,6 +54,9 @@ class GoodsApiController extends Controller
 
     public function edit(int $goodId)
     {
+        if ($this->user === null) {
+            throw new UnauthorizedException("User not found");
+        }
         $input = $this->getInputData();
         $good = Good::getById($goodId);
 
@@ -69,6 +75,10 @@ class GoodsApiController extends Controller
 
     public function delete(int $goodId)
     {
+        if ($this->user === null) {
+            throw new UnauthorizedException("User not found");
+        }
+        
         $good = Good::getById($goodId);
         if ($good === null) {
             throw new NotFoundException('Good already deleted');
