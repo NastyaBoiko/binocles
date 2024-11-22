@@ -12,8 +12,8 @@ header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
 try {
     $method = $_SERVER['REQUEST_METHOD'];
-    $headers = getallheaders();
-    var_dump($headers);die;
+    // $headers = getallheaders();
+    // var_dump($headers);die;
 
     $route = $_GET['route'] ?? '';
 
