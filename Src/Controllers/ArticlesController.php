@@ -100,6 +100,10 @@ class ArticlesController extends Controller
 
     // void значит нет return
     public function delete(int $articleId): void {
+        setcookie('csrf', 'mycsrf', ['samesite' => 'Strict']);
+        if (!array_key_exists('csrf', $_COOKIE)) {
+            throw new NotFoundException('Ошибка csrf!');
+        }
         $article = Article::getById($articleId);
         if ($article === null) {
             throw new NotFoundException();
