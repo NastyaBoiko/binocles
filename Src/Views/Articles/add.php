@@ -4,6 +4,7 @@
         <div class="alert alert-danger" role="alert"><?= $error;?></div>
 <?php endif;?>
 <form action="/binocles/articles/add" method="post">
+    <input type="hidden" name="csrf" value="<?= $csrf ?>">
     <label>
         Название статьи <input type="text" name="name" id="name" value="<?= $_POST['name'] ?? '' ?>" size="50">
     </label>

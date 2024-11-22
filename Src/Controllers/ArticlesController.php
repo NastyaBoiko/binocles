@@ -10,6 +10,7 @@ use Src\Models\Users\User;
 
 class ArticlesController extends Controller
 {
+    public string $csrf;
 
     public function view(int $articleId)
     {
@@ -40,10 +41,19 @@ class ArticlesController extends Controller
         if ($this->user === null) {
             throw new UnauthorizedException();
         }
+
+        $csrf = bin2hex(random_bytes(32));
+
         if (!empty($_POST)) {
 
             try {
-                $article->updateArticle($_POST);
+                if (!array_key_exists('csrf', $_POST)) {
+                    throw new InvalidArgumentException('Ошибка csrf!');
+                }
+
+                if ($_POST['csrf'] == $_SESSION['csrf']) {
+                    $article->updateArticle($_POST);
+                }
             } catch (InvalidArgumentException $e) {
                 $this->view->renderHtml('Articles/edit.php', ['error' => $e->getMessage(), 'article' => $article]);
                 return;
@@ -51,7 +61,10 @@ class ArticlesController extends Controller
             header('Location: /binocles/articles/' . $article->getId(), true, 302);
             exit();
         }
-        $this->view->renderHtml('Articles/edit.php', ['article' => $article]);
+
+        $_SESSION['csrf'] = $csrf;
+
+        $this->view->renderHtml('Articles/edit.php', ['article' => $article, 'csrf' => $csrf]);
     }
 
     public function add(): void {
@@ -59,9 +72,18 @@ class ArticlesController extends Controller
             throw new UnauthorizedException();
         }
 
+        $csrf = bin2hex(random_bytes(32));
+
         if (!empty($_POST)) {
+
             try {
-                $article = Article::createArticle($_POST, $this->user);
+                if (!array_key_exists('csrf', $_POST)) {
+                    throw new InvalidArgumentException('Ошибка csrf!');
+                }
+
+                if ($_POST['csrf'] == $_SESSION['csrf']) {
+                    $article = Article::createArticle($_POST, $this->user);
+                }
             } catch (InvalidArgumentException $e) {
                 $this->view->renderHtml('Articles/add.php', ['error' => $e->getMessage()]);
                 return;
@@ -70,8 +92,9 @@ class ArticlesController extends Controller
             exit();
         }
 
+        $_SESSION['csrf'] = $csrf;
 
-        $this->view->renderHtml('Articles/add.php');
+        $this->view->renderHtml('Articles/add.php', compact('csrf'));
 
     }
 

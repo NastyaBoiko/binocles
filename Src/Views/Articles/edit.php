@@ -6,6 +6,8 @@
         <div class="alert alert-danger" role="alert"><?= $error;?></div>
 <?php endif;?>
 <form action="/binocles/articles/<?= $article->getId();?>/edit" method="post">
+    <input type="hidden" name="csrf" value="<?= $csrf ?>">
+
     <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">Название статьи:</label>
         <input type="text" class="form-control" id="name" name="name" value="<?= $_POST['name'] ?? $article->getName(); ?>">
